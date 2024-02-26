@@ -4,8 +4,10 @@ const movieService = require('../services/movie-service');
 
 router.get('/', (req, res) => {
 
-    const movies = movieService.getAll();
-    res.render('home', { movies });
+    let movies = movieService.getAll();
+
+    movies.length < 1 ? res.render('home') : res.render('home', { movies });
+
 });
 
 router.get('/about', (req, res) => {

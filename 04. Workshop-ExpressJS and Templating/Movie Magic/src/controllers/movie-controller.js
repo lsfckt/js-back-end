@@ -15,8 +15,10 @@ router.post('/create', (req, res) => {
     res.redirect('/');
 });
 
-router.get('/details', (req, res) => {
+router.get('/movie/:movieId', (req, res) => {
     res.render('details');
 });
+
+
 
 module.exports = router;
