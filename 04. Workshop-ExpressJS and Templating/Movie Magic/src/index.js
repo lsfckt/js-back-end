@@ -1,6 +1,15 @@
 const express = require('express');
 
+const hbsConfig = require('./config/hbs-config');
+const expressConfig = require('./config/express-config');
+const router = require('./routes');
+
 const app = express();
 const port = 3000;
 
-app.listen(port, console.log(`Server running on port ${port}...`));
+hbsConfig(app);
+expressConfig(app);
+
+app.use(router);
+
+app.listen(port, () => console.log(`Server running on port ${port}...`));
