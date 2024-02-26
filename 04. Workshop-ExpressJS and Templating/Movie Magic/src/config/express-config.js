@@ -3,7 +3,7 @@ const path = require('path');
 
 function expressConfig(app) {
     app.use(express.static(path.resolve('./src/public')));
-    // app.use(express.static())
+    app.use(express.urlencoded({ extended: false }));
 }
 
 module.exports = expressConfig;
