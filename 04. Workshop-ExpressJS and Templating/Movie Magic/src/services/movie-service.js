@@ -15,3 +15,9 @@ exports.getAll = () => {
     return movies.slice();
 }
 
+exports.getOne = (movieId) => {
+    const movie = movies.find(movie => movie._id == movieId);
+
+    return movie;
+}
+
