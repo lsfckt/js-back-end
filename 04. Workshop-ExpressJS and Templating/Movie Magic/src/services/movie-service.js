@@ -1,14 +1,8 @@
-const movies = [];
+const Movie = require('../models/Movie');
 
 exports.create = (movieData) => {
 
-    if (movies.length === 0) {
-        movieData._id = 1;
-    } else {
-        movieData._id = movies[movies.length - 1]._id + 1;
-    }
-
-    movies.push(movieData);
+    return Movie.create(movieData);
 }
 
 exports.getAll = () => {
@@ -23,7 +17,7 @@ exports.getOne = (movieId) => {
 
 exports.search = (title, genre, year) => {
     let result = movies.slice();
-    
+
     if (title) {
         result = result.filter(movie => movie.title.toLowerCase().includes(title.toLowerCase()));
     }
