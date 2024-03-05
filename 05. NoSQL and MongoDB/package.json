@@ -1,0 +1,20 @@
+{
+  "name": "05.-nosql-and-mongodb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Person.js",
+  "scripts": {
+    "start": "nodemon ./modules/Person.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
