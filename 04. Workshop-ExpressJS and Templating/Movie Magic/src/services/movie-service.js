@@ -10,25 +10,23 @@ exports.getAll = () => {
 }
 
 exports.getOne = (movieId) => {
-    const movie = movies.find(movie => movie._id == movieId);
-
-    return movie;
+    return Movie.findById(movieId);
 }
 
 exports.search = (title, genre, year) => {
-    let result;
+    let query = Movie.find();
 
     if (title) {
-        result = Movie.find({ title: title });
+        query = query.find({ title: new RegExp(title, 'i') });
     }
 
     if (genre) {
-        result = Movie.find({ genre: genre });
+        query = query.find({ genre: genre.toLowerCase() });
     }
 
     if (year) {
-        result = Movie.find({ year: year });
+        query = query.find({ year });
     }
 
-    return result;
+    return query;
 }
