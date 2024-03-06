@@ -22,11 +22,21 @@ router.post('/create', async (req, res) => {
 
 router.get('/movie/:movieId', async (req, res) => {
     const movieId = req.params.movieId;
-    const movie = await movieService.getOne(movieId).lean();
+    try {
+        const movie = await movieService.getOne(movieId).lean();
 
-    movie.rating = new Array(Number(movie.rating)).fill(true);
+        movie.rating = new Array(Number(movie.rating)).fill(true);
 
-    res.render('details', { movie });
+        res.render('details', { movie });
+
+    } catch (error) {
+        console.log(error.message);
+        res.redirect('/');
+    }
+});
+
+router.get('/create/cast', (req, res) => {
+    res.render('cast-create');
 });
 
 module.exports = router;
