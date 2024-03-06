@@ -2,11 +2,17 @@ const router = require('express').Router();
 
 const movieService = require('../services/movie-service');
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
 
-    let movies = movieService.getAll();
+    try {
+        let movies = await movieService.getAll().lean();
 
-    movies.length < 1 ? res.render('home') : res.render('home', { movies });
+        movies === undefined ? res.render('home') : res.render('home', { movies });
+
+    } catch (error) {
+        console.log(error.message);
+        res.redirect('/');
+    }
 
 });
 
@@ -14,9 +20,9 @@ router.get('/about', (req, res) => {
     res.render('about');
 });
 
-router.get('/search', (req, res) => {
+router.get('/search', async (req, res) => {
     const { title, genre, year } = req.query;
-    let movieResult = movieService.search(title, genre, year);
+    let movieResult = await movieService.search(title, genre, year).lean();
 
     res.render('search', { movies: movieResult, title, genre, year });
 });

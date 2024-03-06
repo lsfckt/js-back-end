@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const movieSchema = new Schema({
+const movieSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -16,8 +16,8 @@ const movieSchema = new Schema({
     year: {
         type: Number,
         required: true,
-        min: 7,
-        max: 77,
+        min: 1907,
+        max: 2024,
     },
     rating: {
         type: Number,
@@ -30,10 +30,10 @@ const movieSchema = new Schema({
         required: true,
         maxLength: 700,
     },
-    imageURL: {
+    imageUrl: {
         type: String,
         required: true,
-        match: new RegExp(/^https?\/\//),
+        match: /^https?/,
     },
     // cast: {
     //     type: Number,

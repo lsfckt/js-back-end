@@ -6,7 +6,7 @@ exports.create = (movieData) => {
 }
 
 exports.getAll = () => {
-    return movies.slice();
+    return Movie.find({});
 }
 
 exports.getOne = (movieId) => {
@@ -16,18 +16,18 @@ exports.getOne = (movieId) => {
 }
 
 exports.search = (title, genre, year) => {
-    let result = movies.slice();
+    let result;
 
     if (title) {
-        result = result.filter(movie => movie.title.toLowerCase().includes(title.toLowerCase()));
+        result = Movie.find({ title: title });
     }
 
     if (genre) {
-        result = result.filter(movie => movie.genre.toLowerCase() === genre.toLowerCase());
+        result = Movie.find({ genre: genre });
     }
 
     if (year) {
-        result = result.filter(movie => movie.year === year);
+        result = Movie.find({ year: year });
     }
 
     return result;
