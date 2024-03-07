@@ -30,3 +30,12 @@ exports.search = (title, genre, year) => {
 
     return query;
 }
+
+exports.attach = async (movieId, castId) => {
+    const movie = await this.getOne(movieId);
+
+        // TODO: validate castId if exists
+    movie.casts.push(castId);
+
+    return movie.save();
+};
