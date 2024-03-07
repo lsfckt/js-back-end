@@ -10,7 +10,7 @@ exports.getAll = () => {
 }
 
 exports.getOne = (movieId) => {
-    return Movie.findById(movieId);
+    return Movie.findById(movieId).populate('casts');
 }
 
 exports.search = (title, genre, year) => {

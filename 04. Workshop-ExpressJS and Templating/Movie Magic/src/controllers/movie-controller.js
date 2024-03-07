@@ -22,8 +22,11 @@ router.post('/create', async (req, res) => {
 
 router.get('/movie/:movieId', async (req, res) => {
     const movieId = req.params.movieId;
+
+
     try {
         const movie = await movieService.getOne(movieId).lean();
+        // const casts = await castService.getByIds(movie.casts).lean();
 
         movie.rating = new Array(Number(movie.rating)).fill(true);
 
