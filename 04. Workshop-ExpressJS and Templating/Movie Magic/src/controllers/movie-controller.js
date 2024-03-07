@@ -34,9 +34,11 @@ router.get('/movie/:movieId', async (req, res) => {
     }
 });
 
-router.get('/movie/:movieId/attach', (req, res) => {
+router.get('/movie/:movieId/attach', async (req, res) => {
 
-    res.render('movie/attach');
+    const movie = await movieService.getOne(req.params.movieId).lean();
+
+    res.render('movie/attach', { ...movie });
 });
 
 module.exports = router;
