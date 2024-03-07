@@ -36,12 +36,10 @@ const movieSchema = new mongoose.Schema({
         required: true,
         match: /^https?/,
     },
-    // cast: {
-    //     type: Number,
-    //     required: true,
-    //     min: 1,
-    //     max: 5,
-    // },
+    casts: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Cast',
+    }],
 });
 
 const MovieModel = mongoose.model('Movie', movieSchema);
