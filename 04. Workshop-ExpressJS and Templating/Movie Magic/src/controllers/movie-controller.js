@@ -6,7 +6,6 @@ router.get('/create', (req, res) => {
     res.render('create');
 })
 
-
 router.post('/create', async (req, res) => {
     const newMovie = req.body;
 
@@ -33,10 +32,6 @@ router.get('/movie/:movieId', async (req, res) => {
         console.log(error.message);
         res.redirect('/');
     }
-});
-
-router.get('/create/cast', (req, res) => {
-    res.render('cast-create');
 });
 
 module.exports = router;
