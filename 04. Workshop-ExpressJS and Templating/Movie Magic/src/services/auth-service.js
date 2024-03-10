@@ -21,8 +21,8 @@ exports.login = async (email, password) => {
     if (!isMatch) {
         throw new Error('User or password doesn\'t exist!');
     }
-    // generate jwt token
 
+    // generate jwt token
     const signAsync = util.promisify(jwt.sign);
 
     const token = await signAsync({
