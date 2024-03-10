@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
     email: {
@@ -20,6 +21,12 @@ const userSchema = new Schema({
             message: props => `${props.value} is not valid password, it must have minimum four characters, at least one letter and one number`,
         },
     },
+});
+
+userSchema.pre('save', async function (next) {
+
+    const hash = await bcrypt.hash(this.password, 7);
+    this.password = hash;
 });
 
 const User = model('User', userSchema);
