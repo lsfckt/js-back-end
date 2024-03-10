@@ -18,7 +18,7 @@ const userSchema = new Schema({
                 return /^ (?=.* [A - Za - z])(?=.*\d)[A - Za - z\d]{ 4, }$/i.test(v);
             }
         },
-        message: props => `${props.value} is not valid password, it must have minimum four characters, at least one letter and one number`;
+        message: props => `${props.value} is not valid password, it must have minimum four characters, at least one letter and one number`,
     },
 });
 
