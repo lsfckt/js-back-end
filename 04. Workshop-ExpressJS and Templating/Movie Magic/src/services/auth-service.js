@@ -1,9 +1,8 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const util = require('util');
+const jwt = require('../lib/jwt');
 
-const SECRET = '2039jd02ied0p2dm9k029oed';
+const { SECRET } = require('../config/config');
 
 exports.register = (userData) => User.create(userData);
 
@@ -23,14 +22,8 @@ exports.login = async (email, password) => {
     }
 
     // generate jwt token
-    const signAsync = util.promisify(jwt.sign);
 
-    const token = await signAsync({
-        _id: user._id,
-        email: user.email,
-    },
-        SECRET,
-        { expiresIn: '2h' });
+    const token = await jwt.sign({ _id: user._id, email: user.email }, SECRET, { expiresIn: '2h' });
 
     return token;
 };
