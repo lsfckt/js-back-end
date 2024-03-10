@@ -11,12 +11,12 @@ router.post('/register', async (req, res) => {
 
     try {
         await authService.register(userData);
+
+        res.redirect('/auth/login');
     } catch (error) {
         console.log(error.message);
-        return res.redirect('/register');
+        return res.redirect('/auth/register');
     }
-
-    res.redirect('/login');
 
 });
 
@@ -26,7 +26,15 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    
+
+    try {
+        await authService.login(email, password);
+    } catch (error) {
+        console.log(error);
+        return res.redirect('/auth/login');
+    }
+
+    res.redirect('/');
 });
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, MongooseError } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
@@ -21,6 +21,7 @@ const userSchema = new Schema({
             message: props => `${props.value} is not valid password, it must have minimum four characters, at least one letter and one number`,
         },
     },
+
 });
 
 userSchema.pre('save', async function (next) {
@@ -28,6 +29,13 @@ userSchema.pre('save', async function (next) {
     const hash = await bcrypt.hash(this.password, 7);
     this.password = hash;
 });
+
+userSchema.virtual('repeat-password')
+    .set(function (value) {
+        if (value !== this.password) {
+            throw new MongooseError('Passwords missmatch!');
+        }
+    })
 
 const User = model('User', userSchema);
 

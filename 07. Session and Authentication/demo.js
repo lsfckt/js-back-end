@@ -9,10 +9,10 @@ const port = 3000;
 const saltRounds = 9;
 const pass = '123';
 
-const playloads = { _id: '1234567', username: 'lsfckt' };
+const payloads = { _id: '1234567', username: 'lsfckt' };
 const options = { expiresIn: '2min' };
 const secret = 'mySecret';
-const token = jwt.sign(playloads, secret, options);
+const token = jwt.sign(payloads, secret, options);
 
 console.log(token);
 
