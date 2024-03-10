@@ -23,13 +23,14 @@ exports.login = async (email, password) => {
     }
     // generate jwt token
 
-    const token = util.promisify(() => {
-        jwt.sign({
-            _id: user._id,
-            email: user.email,
-        },
-            SECRET,
-            { expiresIn: '2h' });
-    });
+    const signAsync = util.promisify(jwt.sign);
 
+    const token = await signAsync({
+        _id: user._id,
+        email: user.email,
+    },
+        SECRET,
+        { expiresIn: '2h' });
+
+    return token;
 };
