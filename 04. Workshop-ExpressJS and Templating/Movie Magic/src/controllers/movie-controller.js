@@ -3,6 +3,8 @@ const router = require('express').Router();
 const movieService = require('../services/movie-service');
 const castService = require('../services/cast-service');
 
+const Movie = require('../models/Movie');
+
 router.get('/create', (req, res) => {
     res.render('create');
 })
@@ -57,9 +59,29 @@ router.post('/movie/:movieId/attach', async (req, res) => {
 
 router.get('/movie/:movieId/edit', async (req, res) => {
     const movieId = req.params.movieId;
-    const movie = await movieService.getOne(movieId).lean();
 
-    res.render('movies/edit', { movie });
+    try {
+        const movie = await movieService.getOne(movieId).lean();
+        res.render('movies/edit', { movie });
+
+    } catch (error) {
+        console.log(error);
+        res.redirect('/');
+    }
+
+});
+
+router.post('/movie/:movieId/edit', async (req, res) => {
+    const movieId = req.params.movieId;
+    
+    try {
+        await Movie.findByIdAndUpdate(movieId, req.body);
+        res.redirect(`/movie/${movieId}/edit`);
+
+    } catch (error) {
+        console.log(error);
+        res.redirect(`/movie/${movieId}/edit`);
+    }
 });
 
 module.exports = router;
