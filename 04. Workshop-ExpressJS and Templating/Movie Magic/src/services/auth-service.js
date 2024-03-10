@@ -32,6 +32,4 @@ exports.login = async (email, password) => {
             { expiresIn: '2h' });
     });
 
-    console.log(token);
-
 };
