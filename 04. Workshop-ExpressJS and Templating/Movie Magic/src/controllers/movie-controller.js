@@ -33,7 +33,7 @@ router.get('/movie/:movieId', async (req, res) => {
 
         movie.rating = new Array(Number(movie.rating)).fill(true);
 
-        res.render('movies/details', { movie, isOwner });
+        res.render('movies/details', { movie, isOwner});
 
     } catch (error) {
         console.log(error.message);
