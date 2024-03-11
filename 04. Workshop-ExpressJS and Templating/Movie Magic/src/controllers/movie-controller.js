@@ -76,7 +76,7 @@ router.post('/movie/:movieId/edit', isAuth, async (req, res) => {
     const movieId = req.params.movieId;
 
     try {
-        await Movie.findByIdAndUpdate(movieId, req.body);
+        await movieService.update(movieId, req.body);
         res.redirect(`/movie/${movieId}/edit`);
 
     } catch (error) {
