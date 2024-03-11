@@ -12,6 +12,7 @@ router.get('/create', isAuth, (req, res) => {
 
 router.post('/create', isAuth, async (req, res) => {
     const newMovie = req.body;
+    newMovie.owner = req.user._id;
 
     try {
         await movieService.create(newMovie);
@@ -33,7 +34,7 @@ router.get('/movie/:movieId', async (req, res) => {
 
         movie.rating = new Array(Number(movie.rating)).fill(true);
 
-        res.render('/movies/details', { movie });
+        res.render('movies/details', { movie });
 
     } catch (error) {
         console.log(error.message);
