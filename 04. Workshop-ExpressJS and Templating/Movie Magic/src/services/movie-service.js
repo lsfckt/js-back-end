@@ -34,8 +34,12 @@ exports.search = (title, genre, year) => {
 exports.attach = async (movieId, castId) => {
     const movie = await this.getOne(movieId);
 
-        // TODO: validate castId if exists
+    // TODO: validate castId if exists
     movie.casts.push(castId);
 
     return movie.save();
 };
+
+exports.delete = (movieId) => {
+   return Movie.findByIdAndDelete(movieId);
+}

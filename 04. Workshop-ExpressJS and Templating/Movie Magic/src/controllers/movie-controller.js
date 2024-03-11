@@ -12,7 +12,7 @@ router.get('/create', isAuth, (req, res) => {
 
 router.post('/create', isAuth, async (req, res) => {
     const newMovie = req.body;
-    newMovie.owner = req.user._id;
+    newMovie.owner = req.user?._id;
 
     try {
         await movieService.create(newMovie);
@@ -29,7 +29,7 @@ router.get('/movie/:movieId', async (req, res) => {
 
     try {
         const movie = await movieService.getOne(movieId).lean();
-        const isOwner = movie.owner == req.user._id;
+        const isOwner = movie.owner == req.user?._id;
 
         movie.rating = new Array(Number(movie.rating)).fill(true);
 
@@ -85,4 +85,9 @@ router.post('/movie/:movieId/edit', isAuth, async (req, res) => {
     }
 });
 
+router.get('/movie/:movieId/delete', isAuth, async (req, res) => {
+    await movieService.delete(req.params.movieId);
+
+    res.redirect('/');
+});
 module.exports = router;
