@@ -4,12 +4,13 @@ const movieService = require('../services/movie-service');
 const castService = require('../services/cast-service');
 
 const Movie = require('../models/Movie');
+const { isAuth } = require('../middlewares/authMiddleware');
 
-router.get('/create', (req, res) => {
+router.get('/create', isAuth, (req, res) => {
     res.render('create');
 })
 
-router.post('/create', async (req, res) => {
+router.post('/create', isAuth, async (req, res) => {
     const newMovie = req.body;
 
     try {
@@ -32,7 +33,7 @@ router.get('/movie/:movieId', async (req, res) => {
 
         movie.rating = new Array(Number(movie.rating)).fill(true);
 
-        res.render('details', { movie });
+        res.render('/movies/details', { movie });
 
     } catch (error) {
         console.log(error.message);
@@ -57,7 +58,7 @@ router.post('/movie/:movieId/attach', async (req, res) => {
     res.redirect(`/movie/${movieId}/attach`);
 });
 
-router.get('/movie/:movieId/edit', async (req, res) => {
+router.get('/movie/:movieId/edit', isAuth, async (req, res) => {
     const movieId = req.params.movieId;
 
     try {
@@ -71,9 +72,9 @@ router.get('/movie/:movieId/edit', async (req, res) => {
 
 });
 
-router.post('/movie/:movieId/edit', async (req, res) => {
+router.post('/movie/:movieId/edit', isAuth, async (req, res) => {
     const movieId = req.params.movieId;
-    
+
     try {
         await Movie.findByIdAndUpdate(movieId, req.body);
         res.redirect(`/movie/${movieId}/edit`);
