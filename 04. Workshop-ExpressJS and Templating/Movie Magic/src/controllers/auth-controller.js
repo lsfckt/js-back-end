@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+const User = require('../models/User');
 const authService = require('../services/auth-service');
 
 router.get('/register', (req, res) => {
@@ -8,6 +9,12 @@ router.get('/register', (req, res) => {
 
 router.post('/register', async (req, res) => {
     const userData = req.body;
+
+    const user = User.findOne({ email: userData.email });
+
+    if(user) {
+        throw new Eroor('Email already exist!');
+    }
 
     try {
         await authService.register(userData);
