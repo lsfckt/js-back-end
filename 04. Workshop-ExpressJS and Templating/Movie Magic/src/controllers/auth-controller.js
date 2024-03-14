@@ -1,7 +1,9 @@
 const router = require('express').Router();
+const mongoose = require('mongoose');
 
-const User = require('../models/User');
 const authService = require('../services/auth-service');
+const { getErrorMessage } = require('../utils/errorUtils');
+
 
 router.get('/register', (req, res) => {
     res.render('auth/register');
@@ -15,7 +17,9 @@ router.post('/register', async (req, res) => {
 
         res.redirect('/auth/login');
     } catch (error) {
-        return res.render('auth/register', { error: error.message });
+        const message = getErrorMessage(error);
+
+        return res.render('auth/register', { ...userData, error: message });
     }
 
 });

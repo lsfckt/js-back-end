@@ -11,36 +11,38 @@
 <body>
 
     <div id="box">
+        {{#if error}}
         <div class="error-container">
             <p>{{error}}</p>
         </div>
-   
-    <nav>
-        <img src="/img/logo.webp" alt="logo">
+        {{/if}}
 
-        <ul class="menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/search">Search</a></li>
-            {{#if isAuthenticated}}
-            <li><a href="/create">Create Post</a></li>
-            <li><a href="/cast/create">Create Cast</a></li>
-            <li><a href="/auth/logout">Logout</a></li>
-            {{else}}
-            <li><a href="/auth/login">Login</a></li>
-            <li><a href="/auth/register">Register</a></li>
-            {{/if}}
-        </ul>
+        <nav>
+            <img src="/img/logo.webp" alt="logo">
 
-    </nav>
-    <main>
+            <ul class="menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/search">Search</a></li>
+                {{#if isAuthenticated}}
+                <li><a href="/create">Create Post</a></li>
+                <li><a href="/cast/create">Create Cast</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+                {{else}}
+                <li><a href="/auth/login">Login</a></li>
+                <li><a href="/auth/register">Register</a></li>
+                {{/if}}
+            </ul>
 
-        {{{body}}}
+        </nav>
+        <main>
 
-    </main>
-    <footer>
-        © JS Back-End Workshop
-    </footer>
+            {{{body}}}
+
+        </main>
+        <footer>
+            © JS Back-End Workshop
+        </footer>
     </div>
 
 </body>
