@@ -1,0 +1,40 @@
+6. Register
+    * Fix navigation links
+    * Add register page (view, controller, route)
+    * Fix register form
+    * Add post register action
+    * Add authService
+    * Install bcrypt
+    * Hash password
+    * Check confirm password
+    * Check if user exists
+7. Login
+    * Install jsonwebtoken
+    * Install cookie-parser
+    * Add cookieParser middleware
+    * Optionally: convert to promise based 
+    * Add login page
+    * Fix login form
+    * Add login post action
+    * Add authService login method
+        * validate user
+        * validate password
+        * generate token
+    * Return cookie
+    * Modify register for auto login
+8. Logout
+9. Authentication & Authorization
+    * Add auth middleware
+    * Check token if guest
+    * Verify token
+    * Attach user to request object and res.locals
+    * Use middleware in express
+    * Add isAuth route guard
+10. Error handling
+    * Add notifications
+    * Add getErrorMessage util
+    * Add register error handling
+    * Add login error handling
+11. Last fixes
+    * Dynamic navigation
+
