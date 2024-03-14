@@ -10,19 +10,12 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res) => {
     const userData = req.body;
 
-    const user = User.findOne({ email: userData.email });
-
-    if(user) {
-        throw new Eroor('Email already exist!');
-    }
-
     try {
         await authService.register(userData);
 
         res.redirect('/auth/login');
     } catch (error) {
-        console.log(error.message);
-        return res.redirect('/auth/register');
+        return res.render('auth/register', { error: error.message });
     }
 
 });
