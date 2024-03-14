@@ -6,14 +6,15 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Email is required!'],
         lowercase: true,
-        match: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i,
+        match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i, 'Invalid Email Adress!'],
+        minLength: [7, 'Email should be at least 7 characters long!'],
         trim: true,
         unique: true,
     },
     password: {
         type: String,
         required: [true, 'Password is required!'],
-        minLength: 4,
+        minLength: [4, 'Password should be at least 4 characters long!'],
         validate: {
             validator: function (v) {
                 return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/.test(v);
